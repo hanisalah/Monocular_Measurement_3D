@@ -1,19 +1,20 @@
 import sys
 import subprocess
 import torch
-try:
-    import iou3d_cuda
-except:
-    import platform
-    if platform.system() == 'Windows':
-        subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_win'])
-    else:
-        subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_unix'])
-    import importlib
-    importlib.invalidate_caches()
-    import sys
-    import torch
-    import iou3d_cuda
+if torch.cuda.is_available():
+    try:
+        import iou3d_cuda
+    except:
+        import platform
+        if platform.system() == 'Windows':
+            subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_win'])
+        else:
+            subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_unix'])
+        import importlib
+        importlib.invalidate_caches()
+        import sys
+        import torch
+        import iou3d_cuda
 
 import streamlit as st
 from pathlib import Path
