@@ -1,11 +1,10 @@
 torch==1.12.0
 numpy
 pandas
-opencv-python-headless
+opencv-python
 streamlit
 streamlit-aggrid
 streamlit-drawable-canvas == 0.9.0
-opencv-python
 progress
 matplotlib
 easydict
