@@ -15,7 +15,12 @@ if torch.cuda.is_available():
         import sys
         import torch
         import iou3d_cuda
-
+if torch.cuda.is_available():
+    subprocess.run(['pip','install','opencv-python'])
+else:
+    subprocess.run(['pip','install','opencv-python-headless'])
+if not torch.cuda.is_available():
+    subprocess.run(['pip','install','streamlit-drawable-canvas','--upgrade'])
 import streamlit as st
 from pathlib import Path
 
