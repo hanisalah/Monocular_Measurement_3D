@@ -1,7 +1,7 @@
 torch==1.12.0
 numpy
 pandas
-opencv-python
+opencv-python-headless
 streamlit
 streamlit-aggrid
 streamlit-drawable-canvas == 0.9.0
