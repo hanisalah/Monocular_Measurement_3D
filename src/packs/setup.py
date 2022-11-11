@@ -1,7 +1,7 @@
-from setuptools import setup
 import sys
-import os
 import ctypes
+import pkg_resources
+from setuptools import setup
 
 def get_CUDA_details():
     is_cuda = True
@@ -36,18 +36,21 @@ def get_CUDA_details():
             print("CUDA DRIVER {}".format(version))
     return {'is_cuda':is_cuda, 'version':version}
 
+installed_pkgs = [pkg.key for pkg in pkg_resources.working_set]
+torch_installed = True if 'torch' in installed_pkgs else False
+torch_vision_installed = True if 'torchvision' in installed_pkgs else False
 
 CUDA_details = get_CUDA_details()
 is_cuda = CUDA_details['is_cuda'] #Presence of cuda also indicates that app is not deployed on streamlit cloud, as streamlit cloud has no GPU available.
 cuda_version = CUDA_details['version']
 
 cuda_to_pytorch_ver = {
-                        '11.6':{'torch':'1.12.1+cu116', 'torchvision':'0.13.1+cu116', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu116'},
-                        '11.3':{'torch':'1.12.1+cu113', 'torchvision':'0.13.1+cu113', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu113'},
-                        '10.2':{'torch':'1.12.1+cu102', 'torchvision':'0.13.1+cu102', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu102'},
-
-
-                        'cpu' :{'torch':'1.12.1+cpu', 'torchvision':'0.13.1+cpu', 'extra':'--extra-index-url https://download.pytorch.org/whl/cpu'}}
+                        '11.7':{'torch':'pytorch==1.13.0+cu117', 'torchvision':'0.14.0+cu117'},
+                        '11.6':{'torch':'pytorch==1.13.0+cu116', 'torchvision':'0.14.0+cu116'},
+                        '11.3':{'torch':'pytorch==1.12.1+cu113', 'torchvision':'0.13.1+cu113'},
+                        '10.2':{'torch':'pytorch==1.12.1+cu102', 'torchvision':'0.13.1+cu102'},
+                        '11.1':{'torch':'pytorch==1.10.1+cu111', 'torchvision':'0.11.2+cu111'},
+                        'cpu' :{'torch':'pytorch==1.12.1', 'torchvision':'0.13.1'}}
 
 install_requires=[]
 if not torch_installed:
