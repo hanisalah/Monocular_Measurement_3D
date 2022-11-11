@@ -23,7 +23,10 @@ import torch.nn as nn
 
 #losses
 #from pytorch3d.ops import box3d_overlap
-import iou3d_cuda
+try:
+    import iou3d_cuda
+except:
+    pass
 
 #detector
 import cv2
