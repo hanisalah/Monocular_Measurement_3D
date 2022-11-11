@@ -45,46 +45,24 @@ cuda_to_pytorch_ver = {
                         '11.6':{'torch':'1.12.1+cu116', 'torchvision':'0.13.1+cu116', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu116'},
                         '11.3':{'torch':'1.12.1+cu113', 'torchvision':'0.13.1+cu113', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu113'},
                         '10.2':{'torch':'1.12.1+cu102', 'torchvision':'0.13.1+cu102', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu102'},
-                        
+
 
                         'cpu' :{'torch':'1.12.1+cpu', 'torchvision':'0.13.1+cpu', 'extra':'--extra-index-url https://download.pytorch.org/whl/cpu'}}
 
-add_pkgs=[]
-if is_deployed:
-    add_pkgs=['pytorch', 'opencv-python-headless','streamlit-drawable-canvas']
-else:
-    add_pkgs =['pytorchGPU','opencv-python', 'streamlit-drawable-canvas==0.9.0']
-
-
-import torch
-try:
-    import iou3d_cuda
-except:
-    import platform
-    if platform.system() == 'Windows':
-        subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_win'])
+install_requires=[]
+if not torch_installed:
+    if is_cuda:
+        install_requires.append(cuda_to_pytorch_ver[cuda_version]['torch'])
+        install_requires.append(cuda_to_pytorch_ver[cuda_version]['torchvision'])
     else:
-        subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_unix'])
-    import importlib
-    importlib.invalidate_caches()
-    import sys
-    import torch
-    import iou3d_cuda
-
-
-
-from torch.utils.cpp_extension import BuildExtension, CUDAExtension
-setup(
-    name='iou3d',
-    ext_modules=[
-        CUDAExtension('iou3d_cuda', [
-            'src/iou3d.cpp',
-            'src/iou3d_kernel.cu',
-        ],
-        extra_compile_args={'cxx': ['-g'],
-                            'nvcc': ['-O2']})
-    ],
-    cmdclass={'build_ext': BuildExtension})
+        install_requires.append(cuda_to_pytorch_ver['cpu']['torch'])
+        install_requires.append(cuda_to_pytorch_ver['cpu']['torchvision'])
+if is_cuda:
+    install_requires.append('opencv-python')
+    install_requires.append('streamlit-drawable-canvas==0.9.0')
+else:
+    install_requires.append('opencv-python-headless')
+    install_requires.append('streamlit-drawable-canvas')
 
 setup(name='packs',
         version='1.0.0',
@@ -92,6 +70,5 @@ setup(name='packs',
         packages=[],
         scripts=[],
         description='dummy pack to control vers',
-        install_requires=
-        ['numpy','opencv-python']
+        install_requires=install_requires
         )
