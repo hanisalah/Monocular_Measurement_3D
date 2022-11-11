@@ -14,5 +14,5 @@ fire
 scikit-image
 tensorboardX
 
-./src/iou3d_win; platform_system=='Windows'
-./src/iou3d_unix; platform_system!='Windows'
+#./src/iou3d_win; platform_system=='Windows'
+#./src/iou3d_unix; platform_system!='Windows'
