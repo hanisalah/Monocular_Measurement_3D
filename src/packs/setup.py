@@ -45,12 +45,12 @@ is_cuda = CUDA_details['is_cuda'] #Presence of cuda also indicates that app is n
 cuda_version = CUDA_details['version']
 
 cuda_to_pytorch_ver = {
-                        '11.7':{'torch':'pytorch==1.13.0+cu117', 'torchvision':'torchvision==0.14.0+cu117'},
-                        '11.6':{'torch':'pytorch==1.13.0+cu116', 'torchvision':'torchvision==0.14.0+cu116'},
-                        '11.3':{'torch':'pytorch==1.12.1+cu113', 'torchvision':'torchvision==0.13.1+cu113'},
-                        '10.2':{'torch':'pytorch==1.12.1+cu102', 'torchvision':'torchvision==0.13.1+cu102'},
-                        '11.1':{'torch':'pytorch==1.10.1+cu111', 'torchvision':'torchvision==0.11.2+cu111'},
-                        'cpu' :{'torch':'pytorch', 'torchvision':'torchvision'}}
+                        '11.7':{'torch':'torch==1.13.0+cu117', 'torchvision':'torchvision==0.14.0+cu117'},
+                        '11.6':{'torch':'torch==1.13.0+cu116', 'torchvision':'torchvision==0.14.0+cu116'},
+                        '11.3':{'torch':'torch==1.12.1+cu113', 'torchvision':'torchvision==0.13.1+cu113'},
+                        '10.2':{'torch':'torch==1.12.1+cu102', 'torchvision':'torchvision==0.13.1+cu102'},
+                        '11.1':{'torch':'torch==1.10.1+cu111', 'torchvision':'torchvision==0.11.2+cu111'},
+                        'cpu' :{'torch':'torch', 'torchvision':'torchvision'}}
 
 install_requires=[]
 if not torch_installed:
