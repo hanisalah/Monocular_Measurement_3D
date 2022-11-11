@@ -1,7 +1,7 @@
-import sys
-import ctypes
-import pkg_resources
 from setuptools import setup
+import sys
+import os
+import ctypes
 
 def get_CUDA_details():
     is_cuda = True
@@ -36,36 +36,55 @@ def get_CUDA_details():
             print("CUDA DRIVER {}".format(version))
     return {'is_cuda':is_cuda, 'version':version}
 
-installed_pkgs = [pkg.key for pkg in pkg_resources.working_set]
-torch_installed = True if 'torch' in installed_pkgs else False
-torch_vision_installed = True if 'torchvision' in installed_pkgs else False
 
 CUDA_details = get_CUDA_details()
 is_cuda = CUDA_details['is_cuda'] #Presence of cuda also indicates that app is not deployed on streamlit cloud, as streamlit cloud has no GPU available.
 cuda_version = CUDA_details['version']
 
 cuda_to_pytorch_ver = {
-                        '11.7':{'torch':'pytorch==1.13.0+cu117', 'torchvision':'0.14.0+cu117'},
-                        '11.6':{'torch':'pytorch==1.13.0+cu116', 'torchvision':'0.14.0+cu116'},
-                        '11.3':{'torch':'pytorch==1.12.1+cu113', 'torchvision':'0.13.1+cu113'},
-                        '10.2':{'torch':'pytorch==1.12.1+cu102', 'torchvision':'0.13.1+cu102'},
-                        '11.1':{'torch':'pytorch==1.10.1+cu111', 'torchvision':'0.11.2+cu111'},
-                        'cpu' :{'torch':'pytorch==1.12.1+cpu', 'torchvision':'0.13.1+cpu'}}
+                        '11.6':{'torch':'1.12.1+cu116', 'torchvision':'0.13.1+cu116', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu116'},
+                        '11.3':{'torch':'1.12.1+cu113', 'torchvision':'0.13.1+cu113', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu113'},
+                        '10.2':{'torch':'1.12.1+cu102', 'torchvision':'0.13.1+cu102', 'extra':'--extra-index-url https://download.pytorch.org/whl/cu102'},
+                        
 
-install_requires=[]
-if not torch_installed:
-    if is_cuda:
-        install_requires.append(cuda_to_pytorch_ver[cuda_version]['torch'])
-        install_requires.append(cuda_to_pytorch_ver[cuda_version]['torchvision'])
-    else:
-        install_requires.append(cuda_to_pytorch_ver['cpu']['torch'])
-        install_requires.append(cuda_to_pytorch_ver['cpu']['torchvision'])
-if is_cuda:
-    install_requires.append('opencv-python')
-    install_requires.append('streamlit-drawable-canvas==0.9.0')
+                        'cpu' :{'torch':'1.12.1+cpu', 'torchvision':'0.13.1+cpu', 'extra':'--extra-index-url https://download.pytorch.org/whl/cpu'}}
+
+add_pkgs=[]
+if is_deployed:
+    add_pkgs=['pytorch', 'opencv-python-headless','streamlit-drawable-canvas']
 else:
-    install_requires.append('opencv-python-headless')
-    install_requires.append('streamlit-drawable-canvas')
+    add_pkgs =['pytorchGPU','opencv-python', 'streamlit-drawable-canvas==0.9.0']
+
+
+import torch
+try:
+    import iou3d_cuda
+except:
+    import platform
+    if platform.system() == 'Windows':
+        subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_win'])
+    else:
+        subprocess.run([sys.executable,'-m', 'pip', 'install', './src/iou3d_unix'])
+    import importlib
+    importlib.invalidate_caches()
+    import sys
+    import torch
+    import iou3d_cuda
+
+
+
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension
+setup(
+    name='iou3d',
+    ext_modules=[
+        CUDAExtension('iou3d_cuda', [
+            'src/iou3d.cpp',
+            'src/iou3d_kernel.cu',
+        ],
+        extra_compile_args={'cxx': ['-g'],
+                            'nvcc': ['-O2']})
+    ],
+    cmdclass={'build_ext': BuildExtension})
 
 setup(name='packs',
         version='1.0.0',
@@ -73,5 +92,6 @@ setup(name='packs',
         packages=[],
         scripts=[],
         description='dummy pack to control vers',
-        install_requires=install_requires
+        install_requires=
+        ['numpy','opencv-python']
         )
