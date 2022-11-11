@@ -1,8 +1,8 @@
 from setuptools import setup
-from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 import torch
 
 if torch.cuda.is_available():
+    from torch.utils.cpp_extension import BuildExtension, CUDAExtension
     setup(
         name='iou3d',
         ext_modules=[
