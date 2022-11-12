@@ -65,7 +65,7 @@ if is_cuda:
     install_requires.append('streamlit-drawable-canvas==0.9.0')
 else:
     install_requires.append('opencv-python-headless')
-    install_requires.append('streamlit-drawable-canvas')
+    install_requires.append('streamlit-drawable-canvas==0.8.0')
 
 setup(name='packs',
         version='1.0.0',
