@@ -57,10 +57,10 @@ def save_results():
                 file.writestr('labels/{}_Measurement.txt'.format(st.session_state.predict_img[i]['img_name']), txt_buf.getvalue())
     return zip_buf
 
-app_path = '/'.join(os.path.abspath(os.path.dirname('__file__')).split('\\'))
+app_path = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('\\'))
 st.write('path:'+app_path)
 if app_path=='':
-    app_path=os.path.abspath(os.path.direname('__file__'))#'/app/monocular_measurement_3d'
+    app_path=os.path.abspath(os.path.direname(__file__))#'/app/monocular_measurement_3d'
 st.write('path:'+app_path)
 paths = {'root_path' : app_path, 'data_dir' : app_path+'/train_data/', 'image_dir' : app_path + '/train_data/dset_imgs/', 'calib_dir' : app_path + '/train_data/dset_calib/',
         'label_dir' : app_path + '/train_data/dset_labels/', 'working_dir' : app_path + '/train_data/anns/', 'demo' : app_path + '/train_data/predictions/',
