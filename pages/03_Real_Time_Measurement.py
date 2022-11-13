@@ -59,7 +59,7 @@ def save_results():
 
 app_path = '/'.join(os.path.abspath('__file__').split('\\')[:-1])
 st.write('path:'+app_path)
-if app_path='':
+if app_path=='':
     app_path='/app/monocular_measurement_3d'
 paths = {'root_path' : app_path, 'data_dir' : app_path+'/train_data/', 'image_dir' : app_path + '/train_data/dset_imgs/', 'calib_dir' : app_path + '/train_data/dset_calib/',
         'label_dir' : app_path + '/train_data/dset_labels/', 'working_dir' : app_path + '/train_data/anns/', 'demo' : app_path + '/train_data/predictions/',
