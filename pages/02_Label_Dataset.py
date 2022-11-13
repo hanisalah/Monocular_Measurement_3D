@@ -100,7 +100,7 @@ elif ip_method == 'Files':
                             #background_image=Image.open(img_obj) if img_obj else None, update_streamlit=True, height=cvs_h, width=cvs_w,
                             #drawing_mode='rect', point_display_radius=0, key='canvas'+(str(st.session_state.df_ix) if st.session_state.df_ix>=0 else ''))
 
-
+st.write(st.session_state)
 if st.session_state.df_ix >=0:
     img = deepcopy(st.session_state.df_anns[st.session_state.df_ix]['img'])
     index = deepcopy(st.session_state.df_ix)
@@ -125,7 +125,7 @@ else:
 canvas_result = st_canvas(fill_color='rgba(0,165,255,0.3)', stroke_width=3, stroke_color='#000000', background_color='#eee',
                             background_image=Image.open(img_obj) if img_obj else None, update_streamlit=True, height=cvs_h, width=cvs_w,
                             drawing_mode='rect', point_display_radius=0, key=canvas_key)
-
+st.write(st.session_state)
 col41, col42, col43, col44, col45, col46 = st.columns([2,1,2,2,2,2])
 with col41:
     prev_dsbl = True if st.session_state.df_ix <= 0 else False
