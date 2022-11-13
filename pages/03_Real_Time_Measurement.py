@@ -82,9 +82,9 @@ paths_help = {
                 'model_dir':'This is the directory containing the model .pth files',
                 'master_calib':'This is the directory containing the master calibration files. 1 file for each camera'}
 
-#for k,v in paths.items():
-    #if not os.path.exists(v):
-        #os.makedirs(v)
+for k,v in paths.items():
+    if not os.path.exists(v):
+        os.makedirs(v)
 
 df_columns = ['Class', 'alpha', 'bbox[0]', 'bbox[1]', 'bbox[2]', 'bbox[3]', 'h', 'w', 'l', 'Px', 'Py', 'Pz', 'ori', 'score', 'locker_1', 'locker_2', 'locker_3']
 entry = {'img':'', 'labels': pd.DataFrame(columns=df_columns), 'img_op':'', 'img_name':''}
