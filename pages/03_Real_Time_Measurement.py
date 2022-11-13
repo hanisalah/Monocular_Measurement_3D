@@ -279,10 +279,11 @@ if train_enable == True and flag =='Train':
 
 #All prediction functions go here
 if flag == 'Measure':
-    models = read_files(paths['model_dir']+'*.pth')
+    models = read_files(paths['model_dir']+'*.*')#'*.pth')
     model_seld = st.selectbox('Select Model File',models)
     if model_seld is not None:
         opts_load_model = model_seld + '.pth'
+    else opts_load_model=''
     settings['load_model']= paths['model_dir'] + opts_load_model
 
     calibs = read_files(app_path+'/train_data/cam_calib_master_files/*.txt')
