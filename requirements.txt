@@ -1,6 +1,6 @@
 numpy
 pandas
-streamlit==1.12.2
+streamlit
 streamlit-aggrid
 
 ./src/packs
