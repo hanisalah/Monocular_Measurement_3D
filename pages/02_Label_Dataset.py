@@ -8,6 +8,7 @@ from io import StringIO, BytesIO
 from datetime import datetime
 from PIL import Image
 from st_aggrid import AgGrid
+from copy import deepcopy
 
 def label(result=None, ix=-1):
     if result is not None:
