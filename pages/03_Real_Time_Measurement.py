@@ -58,10 +58,11 @@ def save_results():
     return zip_buf
 
 app_path = '/'.join(os.path.abspath('__file__').split('\\')[:-1])
+st.write(app_path)
 paths = {'root_path' : app_path, 'data_dir' : app_path+'/train_data/', 'image_dir' : app_path + '/train_data/dset_imgs/', 'calib_dir' : app_path + '/train_data/dset_calib/',
-        'label_dir' : app_path + '/train_data/dset_labels/', 'working_dir' : app_path + '/train_data/anns/', 'demo' : app_path + '/predictions/', 'exp_dir' : app_path +'/model/exp/',
-        'save_dir' : app_path +'/model/exp/default/', 'debug_dir' : app_path + '/model/exp/debug/', 'results_dir' : app_path + '/model/exp/results/', 'model_dir' : app_path +'/model/exp/default/',
-        'master_calib': app_path+'/train_data/cam_calib_master_files/'}
+        'label_dir' : app_path + '/train_data/dset_labels/', 'working_dir' : app_path + '/train_data/anns/', 'demo' : app_path + '/train_data/predictions/',
+        'exp_dir' : app_path +'/train_data/model/exp/', 'save_dir' : app_path +'/train_data/model/exp/default/', 'debug_dir' : app_path + '/train_data/model/exp/debug/',
+        'results_dir' : app_path + '/train_data/model/exp/results/', 'model_dir' : app_path +'/train_data/model/exp/default/','master_calib': app_path+'/train_data/cam_calib_master_files/'}
 settings = {'det_cats':det_cats(paths['working_dir']), 'is_resume':False, 'load_model':'', 'batch_size':int(2), 'locker_sizes':lockers(paths['working_dir'])}
 paths_help = {
                 'root_path':'This is the root directory of the application',
