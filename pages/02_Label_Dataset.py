@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_drawable_canvas import st_canvas
 import cv2
 import numpy as np
 import pandas as pd
@@ -7,7 +8,6 @@ from io import StringIO, BytesIO
 from datetime import datetime
 from PIL import Image
 from st_aggrid import AgGrid
-from streamlit_drawable_canvas import st_canvas
 
 def label(result=None, ix=-1):
     if result is not None:
