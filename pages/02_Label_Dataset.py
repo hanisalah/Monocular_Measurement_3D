@@ -114,7 +114,7 @@ if st.session_state.df_ix >=0:
     x = Image.fromarray(scale_img)
     img_obj = BytesIO()
     x.save(img_obj, format='png')
-    img_obj.seek(0)
+    #img_obj.seek(0)
     canvas_key = 'canvas'+str(index)
 else:
     cvs_w = 700
