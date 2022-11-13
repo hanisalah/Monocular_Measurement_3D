@@ -57,11 +57,9 @@ def save_results():
                 file.writestr('labels/{}_Measurement.txt'.format(st.session_state.predict_img[i]['img_name']), txt_buf.getvalue())
     return zip_buf
 
-app_path = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('\\')[:-1])
-st.write('path:'+app_path)
+app_path = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('\\')[:-1]) #Windows style app path
 if app_path=='':
-    app_path = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])#'/app/monocular_measurement_3d'
-st.write('path:'+app_path)
+    app_path = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1]) #Non Windows style (linux..etc) style app path
 paths = {'root_path' : app_path, 'data_dir' : app_path+'/train_data/', 'image_dir' : app_path + '/train_data/dset_imgs/', 'calib_dir' : app_path + '/train_data/dset_calib/',
         'label_dir' : app_path + '/train_data/dset_labels/', 'working_dir' : app_path + '/train_data/anns/', 'demo' : app_path + '/train_data/predictions/',
         'exp_dir' : app_path +'/train_data/model/exp/', 'save_dir' : app_path +'/train_data/model/exp/default/', 'debug_dir' : app_path + '/train_data/model/exp/debug/',
