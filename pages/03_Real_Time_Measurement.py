@@ -279,7 +279,7 @@ if train_enable == True and flag =='Train':
 
 #All prediction functions go here
 if flag == 'Measure':
-    models = read_files(paths['model_dir']+'*.*')#'*.pth')
+    models = read_files(paths['model_dir']+'*.pth')
     model_seld = st.selectbox('Select Model File',models)
     if model_seld is not None:
         opts_load_model = model_seld + '.pth'
@@ -289,6 +289,7 @@ if flag == 'Measure':
 
     calibs = read_files(app_path+'/train_data/cam_calib_master_files/*.txt')
     cal_seld = st.selectbox('Select Camera Calibration File',calibs)
+    cald = cal_seld if cal_seld!=None else ''
 
     ip_method = st.radio('Input Method',('Camera','Files'))
     if ip_method == 'Camera':
@@ -333,7 +334,7 @@ if flag == 'Measure':
         is_next = st.button('Next', on_click=ix_change, kwargs={'mode':1},disabled = next_dsbl)
     with col44:
         compute_dsbl = True if len(st.session_state.predict_img) <=0 else False
-        is_compute = st.button('Compute', on_click=compute, args=(paths, settings, st.session_state.predict_img_ix, paths['master_calib']+cal_seld+'.txt'), disabled = compute_dsbl)
+        is_compute = st.button('Compute', on_click=compute, args=(paths, settings, st.session_state.predict_img_ix, paths['master_calib']+cald+'.txt'), disabled = compute_dsbl)
     with col45:
         save_dsbl = True if len(st.session_state.predict_img)<=0 else False
         dt = '%Y-%m-%d-%H-%M-%S'
