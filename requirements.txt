@@ -3,7 +3,11 @@ pandas
 streamlit
 streamlit-aggrid
 
-./src/packs
+#./src/packs
+torch
+torchvision
+opencv-python-headless
+streamlit-drawable-canvas
 
 progress
 matplotlib
