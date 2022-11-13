@@ -283,7 +283,8 @@ if flag == 'Measure':
     model_seld = st.selectbox('Select Model File',models)
     if model_seld is not None:
         opts_load_model = model_seld + '.pth'
-    else opts_load_model=''
+    else:
+        opts_load_model=''
     settings['load_model']= paths['model_dir'] + opts_load_model
 
     calibs = read_files(app_path+'/train_data/cam_calib_master_files/*.txt')
