@@ -41,6 +41,8 @@ def save_dataset(offset=0):
                 file.writestr('labels/{:06d}.txt'.format(i+offset), txt_buf.getvalue())
     return zip_buf
 
+st.session_state.update(st.session_state)
+
 df_columns = ['class_name','truncation','occlusion','alpha','bbox_tl_x','bbox_tl_y','bbox_br_x','bbox_br_y','height','width','length','loc_x','loc_y','loc_z','rot_y']
 entry = {'img':'', 'labels': pd.DataFrame(columns=df_columns)}
 
