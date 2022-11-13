@@ -53,6 +53,8 @@ if 'tmp_ds_file_set' not in st.session_state.keys():
 if 'tmp_cam_dev_img_id' not in st.session_state.keys():
     st.session_state.tmp_cam_dev_img_id =''
 
+st.write(st.session_state)
+
 ip_method = st.radio('Input Method',('Camera','Files'))
 if ip_method == 'Camera':
     img_stream = st.camera_input('Capture an image')
