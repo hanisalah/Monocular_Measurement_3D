@@ -53,8 +53,6 @@ if 'tmp_ds_file_set' not in st.session_state.keys():
 if 'tmp_cam_dev_img_id' not in st.session_state.keys():
     st.session_state.tmp_cam_dev_img_id =''
 
-st.write(st.session_state)
-
 ip_method = st.radio('Input Method',('Camera','Files'))
 if ip_method == 'Camera':
     img_stream = st.camera_input('Capture an image')
@@ -82,7 +80,6 @@ elif ip_method == 'Files':
             st.session_state.df_ix += 1
             st.session_state.tmp_ds_file_set.add(img_stream.name)
 
-
 img_org_w = st.session_state.df_anns[st.session_state.df_ix]['img'].shape[1] if st.session_state.df_ix >= 0 else 0
 img_org_h = st.session_state.df_anns[st.session_state.df_ix]['img'].shape[0] if st.session_state.df_ix >= 0 else 0
 cvs_w = 700
@@ -97,10 +94,9 @@ if st.session_state.df_ix >= 0:
     img_obj.seek(0)
 else:
     img_obj=None
-#canvas_key='canvas'+(str(st.session_state.df_ix) if st.session_state.df_ix>=0 else '')
 canvas_result = st_canvas(fill_color='rgba(0,165,255,0.3)', stroke_width=3, stroke_color='#000000', background_color='#eee',
                             background_image=Image.open(img_obj) if img_obj else None, update_streamlit=True, height=cvs_h, width=cvs_w,
-                            drawing_mode='rect', point_display_radius=0)#, key=canvas_key)
+                            drawing_mode='rect', point_display_radius=0, key='canvas'+(str(st.session_state.df_ix) if st.session_state.df_ix>=0 else ''))
 
 col41, col42, col43, col44, col45, col46 = st.columns([2,1,2,2,2,2])
 with col41:
