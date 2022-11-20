@@ -2,10 +2,8 @@ numpy
 pandas
 streamlit
 streamlit-aggrid
-streamlit-drawable-canvas
-torch
-torchvision
-opencv-python-headless
+streamlit-drawable-canvas==0.9.0
+opencv-python
 progress
 matplotlib
 easydict
