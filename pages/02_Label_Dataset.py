@@ -43,7 +43,7 @@ def save_dataset(offset=0):
     return zip_buf
 
 df_columns = ['class_name','truncation','occlusion','alpha','bbox_tl_x','bbox_tl_y','bbox_br_x','bbox_br_y','height','width','length','loc_x','loc_y','loc_z','rot_y']
-entry = {'img':'', 'labels': pd.DataFrame(columns=df_columns)}
+entry = {'img':'', 'labels': pd.DataFrame(columns=df_columns), 'img_stream':''}
 
 if 'df_anns' not in st.session_state.keys():
     st.session_state.df_anns = []
@@ -77,6 +77,7 @@ elif ip_method == 'Files':
             cv_img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), cv2.IMREAD_COLOR)
             new_entry = entry.copy()
             new_entry['img']=cv_img
+            new_entry['img_stream']=img_stream
             st.session_state.df_anns.append(new_entry)
             st.session_state.df_ix += 1
             st.session_state.tmp_ds_file_set.add(img_stream.name)
@@ -89,17 +90,19 @@ scale_w = img_org_w / cvs_w if st.session_state.df_ix >= 0 else 1
 scale_h = img_org_h / cvs_h if st.session_state.df_ix >= 0 else 1
 scale_img = cv2.resize(st.session_state.df_anns[st.session_state.df_ix]['img'][:,:,::-1], (cvs_w,cvs_h)) if st.session_state.df_ix >= 0 else None
 if st.session_state.df_ix >= 0:
-    x = Image.fromarray(scale_img)
-    img_obj = BytesIO()
-    x.save(img_obj,format='png')
-    img_obj.seek(0)
+    #x = Image.fromarray(scale_img)
+    #img_obj = BytesIO()
+    #x.save(img_obj,format='png')
+    #img_obj.seek(0)
+    img_obj = st.session_state.df_anns[st.session_state.df_ix]['img_stream']
+    canvas_key = 'canvas'+str(st.session_state.df_ix) #(str(st.session_state.df_ix) if st.session_state.df_ix>=0 else '')
 else:
     img_obj=None
+    canvas_key = 'canvas'
 
-'This is a random string to resolve st_canvas error on deploy'
 canvas_result = st_canvas(fill_color='rgba(0,165,255,0.3)', stroke_width=3, stroke_color='#000000', background_color='#eee',
                             background_image=Image.open(img_obj) if img_obj else None, update_streamlit=True, height=cvs_h, width=cvs_w,
-                            drawing_mode='rect', point_display_radius=0, key='canvas'+(str(st.session_state.df_ix) if st.session_state.df_ix>=0 else ''))
+                            drawing_mode='rect', point_display_radius=0, key=canvas_key)#'canvas'+(str(st.session_state.df_ix) if st.session_state.df_ix>=0 else ''))
 
 col41, col42, col43, col44, col45, col46 = st.columns([2,1,2,2,2,2])
 with col41:
