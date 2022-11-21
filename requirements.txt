@@ -1,6 +1,6 @@
 numpy
 pandas
-streamlit
+streamlit==1.12.2
 streamlit-aggrid
 streamlit-drawable-canvas
 torch
