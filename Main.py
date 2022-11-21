@@ -11,15 +11,6 @@ if is_clear:
     for key in st.session_state.keys():
         del st.session_state[key]
 
-if 'df_anns' not in st.session_state.keys():
-    st.session_state.df_anns = []
-if 'df_ix' not in st.session_state.keys():
-    st.session_state.df_ix = -1
-if 'tmp_ds_file_set' not in st.session_state.keys():
-    st.session_state.tmp_ds_file_set =set()
-if 'tmp_cam_dev_img_id' not in st.session_state.keys():
-    st.session_state.tmp_cam_dev_img_id =''
-
 st.header('Info')
 st.subheader('Main Page')
 st.write("""
