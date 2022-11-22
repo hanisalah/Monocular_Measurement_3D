@@ -11,16 +11,16 @@ md_adaptations = read_markdown_file('docs/adaptations.md')
 md_notes = read_markdown_file('docs/general_notes.md')
 md_install = read_markdown_file('readme.md')
 
-with st.expander('## About',expanded=True):
+with st.expander('About',expanded=True):
     st.markdown(md_about, unsafe_allow_html=True)
     st.markdown(md_adaptations, unsafe_allow_html=True)
     st.image('docs/chessboard.jpg')
     st.markdown(md_notes, unsafe_allow_html=True)
 
-with st.expander('## Installation'):
+with st.expander('Installation'):
     st.markdown(md_install, unsafe_allow_html=True)
 
-with st.expander('## Help: Main Page for Training and Inference'):
+with st.expander('Help: Main Page for Training and Inference'):
     st.warning("""
                 It is very important to note that a streamlit app can be activated on a local computer or through a web deployment.
                 Training a model can only be executed locally since there is no access to a GPU through a deployed app.""")
@@ -35,7 +35,7 @@ with st.expander('## Help: Main Page for Training and Inference'):
                 7. Once prediction images are uploaded, press the compute button and the model will predict and draw 3D bounding boxes around objects and provide a table showing the dimensions.
                 8. Aside from the said functionalities, you can also clear all data stored during the session by clicking the button on the sidebar.""")
 
-with st.expander('## Help: Calibrate Camera Page'):
+with st.expander('Help: Calibrate Camera Page'):
     st.write("""
                 1. From this page you should upload calibration images, calibrate your camera, and store the results (calibration matrix).
                 2. While there is an interface to capture images through camera, it is highly recommended to take images by your native app and use the upload files options instead.
@@ -46,7 +46,7 @@ with st.expander('## Help: Calibrate Camera Page'):
                 6. Specify the length of a single square side in the calibration images in mm.
                 7. Click the calibrate button and when calibration is done, click the save all button.""")
 
-with st.expander('## Help: Label Dataset Page'):
+with st.expander('Help: Label Dataset Page'):
     st.write("""
                 1. From this page you should upload your training dataset images for labelling.
                 2. While there is an interface to capture images through camera, it is highly recommended to take images by your native app and use the upload files options instead.
