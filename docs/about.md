@@ -14,7 +14,8 @@
     Year = {2020},
     Eprint = {arXiv:2001.03343},
     }
-</code>
+</code><br>
+
 # License
 1. The above mentioned reference as well as this application are released under the MIT License (refer to the LICENSE file for details).
 2. Portions of the code are borrowed from:
