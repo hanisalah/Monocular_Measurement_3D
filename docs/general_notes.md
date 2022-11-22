@@ -20,10 +20,10 @@
 | 1 | Truncation | How much of the object has left image boundaries. | Float | 0.0, 1.0 | 0.0 | Not used. Can be set to 0.0 |
 | 1 | Occlusion | Occlusion state (0=fully visible, 1=partly visible, 2=largely occluded, 3= unknown.) | Integer | [0,3] | 2 | Not Used. Can be set to 0 |
 | 1 | Alpha | Observation Angle of object | Float | [-pi, pi] | 0.146 | Not used. Can be set to 0.0 |
-| 4 | Bounding box coordinates: [xmin, ymin, xmax, ymax] | Location of the object in the image | Float(0 based index) | [0 to image width],[0 to image_height], [top_left, image_width], [bottom_right, image_height] | 100 120 180 160 | See next section for possible ways to get this info |
+| 4 | Bounding box coordinates: [xmin, ymin, xmax, ymax] | Location of the object in the image | Float(0 based index) | [0 to image width],[0 to image_height], [top_left, image_width], [bottom_right, image_height] | 100 120 180 160 | Automatically populated from the Label Dataset page |
 | 3 | 3D dimension | Height, width, length of the object (in meters) | Float | N/A | 1.65, 1.67, 3.64 | Measure the object |
-| 3 | Location | 3D object location x, y, z in camera coordinates (in meters) | Float | N/A | -0.65,1.71, 46.7 | See next section for possible ways to get this info |
-| 1 | Rotation_y | Rotation ry around the Y-axis in camera coordinates | Float | [-pi, pi] | -1.59 | See next section for possible ways to get this info |
+| 3 | Location | 3D object location x, y, z in camera coordinates (in meters) | Float | N/A | -0.65,1.71, 46.7 | - |
+| 1 | Rotation_y | Rotation ry around the Y-axis in camera coordinates | Float | [-pi, pi] | -1.59 | - |
 
 3. For each image, there should exist a text file with the same 6-digit image name (in different folder). In each text file, there will exist one line for each object in the image, each line contain 15 space separated entries reflecting the above. Below is a sample:<br> <code>Pedestrian 0.00 0 -0.20 712.40 143.00 810.73 307.92 1.89 0.48 1.20 1.84 1.47 8.41 0.01</code>
 

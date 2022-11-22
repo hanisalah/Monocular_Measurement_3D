@@ -1,7 +1,7 @@
 # Citation
 1. The program is an adaptation from <href>https://github.com/Banconxuan/RTM3D</href>
 2. The program is a variation of the implementation of the below papers
-'''
+<code>
     @misc{2009.00764,
     Author = {Peixuan Li},
     Title = {Monocular 3D Detection with Geometric Constraints Embedding and Semi-supervised Training},
@@ -14,7 +14,7 @@
     Year = {2020},
     Eprint = {arXiv:2001.03343},
     }
-'''
+</code>
 # License
 1. The above mentioned reference as well as this application are released under the MIT License (refer to the LICENSE file for details).
 2. Portions of the code are borrowed from:
