@@ -13,7 +13,7 @@ md_install = read_markdown_file('readme.md')
 
 with st.expander('About',expanded=True):
     st.markdown(md_about, unsafe_allow_html=True)
-    st.markdown(md_adaptations, unsfae_allow_html=True)
+    st.markdown(md_adaptations, unsafe_allow_html=True)
     st.image('docs/chessboard.jpg')
     st.markdown(md_notes, unsafe_allow_html=True)
 
